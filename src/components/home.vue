@@ -14,14 +14,14 @@
 
     <el-container>
       <el-aside width="200px" class="aside">
-        <el-menu default-active="2" unique-opened class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose">
+        <el-menu default-active="2" unique-opened router>
           <!-- 1 -->
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-location"></i>
               <span>用户管理</span>
             </template>
-            <el-menu-item index="1-1">
+            <el-menu-item index="users">
               <i class="el-icon-menu"></i>
               用户列表
             </el-menu-item>
@@ -85,7 +85,9 @@
         </el-menu>
       </el-aside>
 
-      <el-main class="main">Main</el-main>
+      <el-main class="main">
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -93,11 +95,11 @@
 <script>
 export default {
   beforeCreate () {
-    if (!localStorage.getItem("token")) {
+    if (!localStorage.getItem('token')) {
       this.$router.push({
         name: 'login'
       })
-      this.$message.warning("请先登录")
+      this.$message.warning('请先登录')
     }
   },
   methods: {
